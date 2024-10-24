@@ -1,0 +1,17 @@
+C;1;Rodrigo;00100200340;rodrigo@email.com;20735180
+C;2;Francisquini;11122233344;francisquini@email.com;20775000
+C;3;Bruno;60050040010;bruno@email.com;20775020
+C;4;Mattos;12312312345;mattos@email.com;20735180
+CR;1;5;109.9;Econômico;Manual;false
+CR;2;5;119.9;Econômico Sedan;Manual;false
+CR;3;5;129.9;Econômico Plus;Automático;true
+CR;4;2;134.9;Picape Econômica;Manual;false
+CR;5;2;144.9;Picape Econômica;Automático;true
+CR;6;2;179.9;Picape Média;Automático;true
+CM;7;3;459.9;Baú;2000
+CM;8;3;559.9;Baú;3000
+CM;9;3;259.9;Plataforma;2000
+CM;10;3;359.9;Plataforma;3000
+CM;11;3;459.9;Plataforma;4000
+CM;12;3;499.9;Sider;2000
+CM;13;3;599.9;Sider;3000
