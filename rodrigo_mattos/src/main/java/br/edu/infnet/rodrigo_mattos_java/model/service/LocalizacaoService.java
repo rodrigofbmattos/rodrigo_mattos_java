@@ -19,7 +19,7 @@ public class LocalizacaoService {
 	private LocalidadeClient localidadeClient;
 
 	public Endereco buscarPorCep(String cep) {
-		return enderecoClient.buscarPorCep(cep);
+		return enderecoClient.findByCep(cep);
 	}
 	
 	public Collection<Estado> obterEstados() {

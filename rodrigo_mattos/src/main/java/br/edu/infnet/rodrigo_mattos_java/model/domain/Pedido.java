@@ -1,5 +1,6 @@
 package br.edu.infnet.rodrigo_mattos_java.model.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,12 +28,16 @@ public class Pedido {
 	private Float valorTotal;
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
-	@JoinColumn(name = "id_veiculo")
+	@JoinColumn(name = "id_pedido")
 	private List<Veiculo> veiculos;
 	
 	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "id_cliente")
 	private Cliente cliente; 
+	
+	public Pedido() {
+		veiculos = new ArrayList<Veiculo>();
+	}
 	
 	public Integer getId() {
 		return id;
@@ -69,5 +74,11 @@ public class Pedido {
 	}
 	public void setVeiculos(List<Veiculo> veiculos) {
 		this.veiculos = veiculos;
+	}
+	public Cliente getCliente() {
+		return cliente;
+	}
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 }

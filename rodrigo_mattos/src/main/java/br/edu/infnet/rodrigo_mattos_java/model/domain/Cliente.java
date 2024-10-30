@@ -1,15 +1,14 @@
 package br.edu.infnet.rodrigo_mattos_java.model.domain;
 
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
+//import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "cliente")
@@ -22,15 +21,15 @@ public class Cliente {
 	private String cpf;
 	private String email;
 	
-	@Transient	
-	private Endereco endereco;
-	
-//	@OneToOne(cascade = CascadeType.PERSIST)
-//	@JoinColumn(name = "id_endereco")
+//	@Transient	
 //	private Endereco endereco;
+	
+	@OneToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "id_endereco")
+	private Endereco endereco;
 
-	@Transient
-	private Pedido pedido;
+//	@Transient
+//	private Pedido pedido;
 
 //	@Override
 //	public String toString() {
@@ -56,48 +55,37 @@ public class Cliente {
 	public Integer getId() {
 		return id;
 	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
 	public String getNome() {
 		return nome;
 	}
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 	public String getCpf() {
 		return cpf;
 	}
-
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-
 	public String getEmail() {
 		return email;
 	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 	public Endereco getEndereco() {
 		return endereco;
 	}
-
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-
-	public Pedido getPedido() {
-		return pedido;
-	}
-
-	public void setPedido(Pedido pedido) {
-		this.pedido = pedido;
-	}
+//	public Pedido getPedido() {
+//		return pedido;
+//	}
+//	public void setPedido(Pedido pedido) {
+//		this.pedido = pedido;
+//	}
 }

@@ -10,5 +10,5 @@ import br.edu.infnet.rodrigo_mattos_java.model.domain.Endereco;
 public interface EnderecoClient {
 
 	@GetMapping(value = "/{cep}/json/")
-	Endereco buscarPorCep(@PathVariable String cep);
+	Endereco findByCep(@PathVariable String cep);
 }

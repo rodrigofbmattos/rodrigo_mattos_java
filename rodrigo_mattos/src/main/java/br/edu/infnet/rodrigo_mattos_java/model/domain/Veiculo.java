@@ -22,7 +22,7 @@ public class Veiculo {
 	private Float precoDiaria;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_veiculo")
+	@JoinColumn(name = "id_pedido")
 	private Pedido pedido;
 	
 	public Integer getQuantidadePassageiros() {

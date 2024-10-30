@@ -1,6 +1,7 @@
 package br.edu.infnet.rodrigo_mattos_java.model.service;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,11 @@ public class ClienteService {
 		return clienteRepository.save(cliente);
 	}
 	
-	public Collection<Cliente> obterLista(){
+	public Collection<Cliente> obterLista() {
 		return (Collection<Cliente>) clienteRepository.findAll();
+	}
+	
+	public List<Cliente> buscarPorNomeContendo(String nome) {
+		return clienteRepository.findByNomeContaining(nome);
 	}
 }
