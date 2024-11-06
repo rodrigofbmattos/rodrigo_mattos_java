@@ -18,7 +18,6 @@ public class ClienteService {
 	private LocalizacaoService localizacaoService;
 
 	public Cliente incluir(Cliente cliente) {
-		
 		String cep = cliente.getEndereco().getCep();
 		
 		Endereco endereco = localizacaoService.buscarPorCep(cep);
@@ -28,11 +27,23 @@ public class ClienteService {
 		return clienteRepository.save(cliente);
 	}
 	
+	public void excluir(Integer id) {
+		clienteRepository.deleteById(id);
+	}
+	
 	public Collection<Cliente> obterLista() {
 		return (Collection<Cliente>) clienteRepository.findAll();
 	}
 	
 	public List<Cliente> buscarPorNomeContendo(String nome) {
 		return clienteRepository.findByNomeContaining(nome);
+	}
+	
+	public long obterQuantidade() {
+		return clienteRepository.count();
+	}
+
+	public Cliente buscarPorId(Integer id) {
+		return clienteRepository.findById(id).orElse(null);
 	}
 }

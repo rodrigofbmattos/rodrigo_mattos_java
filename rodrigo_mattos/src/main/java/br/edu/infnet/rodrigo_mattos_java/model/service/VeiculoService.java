@@ -18,11 +18,19 @@ public class VeiculoService {
 		veiculoRepository.save(veiculo);
 	}
 	
+	public void excluir(Integer id) {
+		veiculoRepository.deleteById(id);
+	}
+	
 	public Collection<Veiculo> obterLista() {
 		return (Collection<Veiculo>) veiculoRepository.findAll();
 	}
 	
 	public List<Veiculo> buscarPorPrecoDiariaEntre(float precoDiariaMinimo, float precoDiariaMaximo){
 		return veiculoRepository.findByPrecoDiariaBetween(precoDiariaMinimo, precoDiariaMaximo);
+	}
+	
+	public long obterQuantidade() {
+		return veiculoRepository.count();
 	}
 }
