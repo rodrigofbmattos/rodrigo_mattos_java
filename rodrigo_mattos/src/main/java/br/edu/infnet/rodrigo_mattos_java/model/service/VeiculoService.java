@@ -33,4 +33,8 @@ public class VeiculoService {
 	public long obterQuantidade() {
 		return veiculoRepository.count();
 	}
+
+	public Veiculo obterPorId(Integer id) {
+		return veiculoRepository.findById(id).orElse(null);
+	}
 }

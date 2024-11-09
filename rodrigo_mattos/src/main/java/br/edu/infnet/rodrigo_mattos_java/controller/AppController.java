@@ -16,14 +16,18 @@ public class AppController {
 	@Autowired
 	private VeiculoService veiculoService;
 	@Autowired
+	private ClienteService carroService;
+	@Autowired
+	private ClienteService caminhaoService;
+	@Autowired
 	private PedidoService pedidoService;
 	
 	@GetMapping(value = "/")
 	public String telaHome(Model model) {
 		model.addAttribute("quantidadeCliente", clienteService.obterQuantidade());
 		model.addAttribute("quantidadeVeiculo", veiculoService.obterQuantidade());
-		model.addAttribute("quantidadeCarro", 50);
-		model.addAttribute("quantidadeCaminhao", 30);
+		model.addAttribute("quantidadeCarro", carroService.obterQuantidade());
+		model.addAttribute("quantidadeCaminhao", caminhaoService.obterQuantidade());
 		model.addAttribute("quantidadePedido", pedidoService.obterQuantidade());
 
 		return "home";

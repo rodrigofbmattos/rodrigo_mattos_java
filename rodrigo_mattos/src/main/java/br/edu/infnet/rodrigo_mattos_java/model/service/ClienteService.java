@@ -27,8 +27,10 @@ public class ClienteService {
 		return clienteRepository.save(cliente);
 	}
 	
-	public void excluir(Integer id) {
+	public boolean excluir(Integer id) {
 		clienteRepository.deleteById(id);
+		
+		return true;
 	}
 	
 	public Collection<Cliente> obterLista() {
