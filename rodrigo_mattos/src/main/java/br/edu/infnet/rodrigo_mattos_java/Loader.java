@@ -2,7 +2,6 @@ package br.edu.infnet.rodrigo_mattos_java;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.sql.Date;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;

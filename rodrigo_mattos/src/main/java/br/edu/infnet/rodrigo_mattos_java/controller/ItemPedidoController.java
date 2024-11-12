@@ -16,13 +16,13 @@ public class ItemPedidoController {
 	@Autowired
 	private ItemPedidoService itemPedidoService;
 		
-	@GetMapping(value = "/itempedido/lista")
+	@GetMapping(value = "/itemPedido/lista")
 	public Collection<ItemPedido> obterLista(){
 		
 		return itemPedidoService.obterLista();
 	}
 
-	@PostMapping(value = "/itempedido/incluir")
+	@PostMapping(value = "/itemPedido/incluir")
 	public String incluir(@RequestBody ItemPedido itemPedido) {
 		
 		itemPedidoService.incluir(itemPedido);

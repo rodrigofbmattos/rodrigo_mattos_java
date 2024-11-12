@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.edu.infnet.rodrigo_mattos_java.Constantes;
+import br.edu.infnet.rodrigo_mattos_java.exceptions.VeiculoNaoEncontradoException;
 import br.edu.infnet.rodrigo_mattos_java.model.domain.Veiculo;
 import br.edu.infnet.rodrigo_mattos_java.model.repository.VeiculoRepository;
 
@@ -18,8 +20,26 @@ public class VeiculoService {
 		veiculoRepository.save(veiculo);
 	}
 	
-	public void excluir(Integer id) {
+	public boolean excluir(Integer id) {
 		veiculoRepository.deleteById(id);
+		
+		return true;
+	}
+	
+	public Veiculo alterar(Veiculo veiculo) {
+		if (!veiculoRepository.existsById(veiculo.getId())) {
+			throw new VeiculoNaoEncontradoException(Constantes.MENSAGEM_CLIENTE_NAO_ENCONTRADO);
+		}
+		
+		return veiculoRepository.save(veiculo);
+	}
+	
+	public Veiculo alterarPrecoDiaria(Integer id, float precoDiaria) {
+		Veiculo veiculoExistente = veiculoRepository.findById(id).orElse(null); //TODO: Colocar uma Exception
+		
+		veiculoExistente.setPrecoDiaria(precoDiaria);
+		
+		return veiculoRepository.save(veiculoExistente);
 	}
 	
 	public Collection<Veiculo> obterLista() {
@@ -34,7 +54,7 @@ public class VeiculoService {
 		return veiculoRepository.count();
 	}
 
-	public Veiculo obterPorId(Integer id) {
+	public Veiculo buscarPorId(Integer id) {
 		return veiculoRepository.findById(id).orElse(null);
 	}
 }

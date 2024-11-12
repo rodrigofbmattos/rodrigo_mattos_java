@@ -8,6 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 //import jakarta.persistence.Transient;
 
 @Entity
@@ -17,7 +19,10 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@NotBlank(message = "O Nome do Cliente é obrigatório.")
+	@Size(min = 3, max = 50, message = "O Nome do Cliente deve ter entre 3 e 50 caracteres.")
 	private String nome;
+	
 	private String cpf;
 	private String email;
 	

@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.edu.infnet.rodrigo_mattos_java.model.domain.Cliente;
@@ -37,8 +38,16 @@ public class ClienteService {
 		return (Collection<Cliente>) clienteRepository.findAll();
 	}
 	
+	public Collection<Cliente> obterListaOrdenadaPorNome() {
+		return (Collection<Cliente>) clienteRepository.findAll(Sort.by(Sort.Order.asc("nome")));
+	}
+	
 	public List<Cliente> buscarPorNomeContendo(String nome) {
-		return clienteRepository.findByNomeContaining(nome);
+		return clienteRepository.findByNomeContaining(nome, null);
+	}
+	
+	public List<Cliente> buscarPorNomeContendoOrdenadoPorNome(String nome) {
+		return clienteRepository.findByNomeContaining(nome, Sort.by(Sort.Order.asc("nome")));
 	}
 	
 	public long obterQuantidade() {

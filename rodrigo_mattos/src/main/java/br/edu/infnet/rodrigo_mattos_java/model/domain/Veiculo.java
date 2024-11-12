@@ -11,6 +11,8 @@ import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
 
 @Entity
 @Table(name = "veiculo")
@@ -21,6 +23,8 @@ public class Veiculo {
 	private Integer id;
 	
 	private Integer quantidadePassageiros;
+	
+	@DecimalMin(value = "0.1", message = "O Preço da Diária deve ser maior que zero.")
 	private Float precoDiaria;
 	
 	@ManyToOne
