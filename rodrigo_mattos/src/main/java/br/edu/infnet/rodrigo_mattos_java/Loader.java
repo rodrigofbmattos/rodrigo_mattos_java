@@ -34,13 +34,13 @@ public class Loader implements ApplicationRunner {
 	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-		for (Estado estado : localizacaoService.obterEstados()) {
-			System.out.println("Estado: " + estado.getNome());
-		}
-		
-		for (Municipio municipio : localizacaoService.obterMunicipios(33)) {
-			System.out.println("Município: " + municipio.getNome());
-		}
+//		for (Estado estado : localizacaoService.obterEstados()) {
+//			System.out.println("Estado: " + estado.getNome());
+//		}
+//		
+//		for (Municipio municipio : localizacaoService.obterMunicipios(33)) {
+//			System.out.println("Município: " + municipio.getNome());
+//		}
 		
 		FileReader file = new FileReader("files/aluguel_veiculos.txt");
 		BufferedReader leitura = new BufferedReader(file);
@@ -48,15 +48,16 @@ public class Loader implements ApplicationRunner {
 		String linha = leitura.readLine();
 		
 		Cliente cliente = null;
-
+		Pedido pedido = null;
+		
 		while(linha != null) {
 			
 			String[] campos = linha.split(";");
 			
 			switch (campos[0].toUpperCase()) {
 			case "C":
-				
 				cliente = new Cliente();
+				
 				cliente.setNome(campos[2]);
 				cliente.setCpf(campos[3]);
 				cliente.setEmail(campos[4]);
@@ -65,7 +66,7 @@ public class Loader implements ApplicationRunner {
 								
 				cliente = clienteService.incluir(cliente);
 				
-				System.out.println("Cliente: [" + cliente + "]");
+//				System.out.println("Cliente: [" + cliente + "]");
 				
 				break;
 
@@ -79,6 +80,8 @@ public class Loader implements ApplicationRunner {
 				carro.setCambio(campos[5]);
 				carro.setArCondicionado(Boolean.valueOf(campos[6]));
 				
+				pedido = new Pedido();
+				carro.setPedido(new Pedido(Integer.valueOf(campos[7])));
 				veiculoService.incluir(carro);
 				
 				break;
@@ -92,22 +95,29 @@ public class Loader implements ApplicationRunner {
 				caminhao.setTipoCaminhao(campos[4]);
 				caminhao.setCapacidadeCarga(Float.valueOf(campos[5]));
 				
+				pedido = new Pedido();
+				caminhao.setPedido(new Pedido(Integer.valueOf(campos[6])));
 				veiculoService.incluir(caminhao);
 				
 				break;
 				
 			case "P":
-				Pedido pedido = new Pedido();
+				pedido = new Pedido();
 				
-				pedido.setId(Integer.valueOf(campos[1]));
+				//pedido.setId(Integer.valueOf(campos[1]));
 				pedido.setDataHoraPedido(LocalDateTime.parse(campos[2]));
-				pedido.setValorTotal(Float.valueOf(campos[3]));
+				pedido.setDataHoraRetirada(LocalDateTime.parse(campos[3]));
+				pedido.setDataHoraDevolucao(LocalDateTime.parse(campos[4]));
+				pedido.setValorTotal(Float.valueOf(campos[5]));
 				
-//				cliente = clienteService.buscarPorId(Integer.valueOf(campos[4]));
-//				
-//				pedido.setCliente(cliente);
-//				
-//				pedidoService.incluir(pedido);
+				// Incluindo passando somente o Id do Cliente
+				pedido.setCliente(new Cliente(Integer.valueOf(campos[6])));
+				pedido = pedidoService.incluir(pedido);
+				
+				// Incluindo passando o Id do Cliente e buscando as informações do Cliente no Banco de Dados e preenchendo o Cliente em Pedido
+				//cliente = clienteService.buscarPorId(Integer.valueOf(campos[6]));
+				//pedido.setCliente(cliente);
+				//pedidoService.incluir(pedido);
 				
 				break;
 
@@ -118,9 +128,9 @@ public class Loader implements ApplicationRunner {
 			linha = leitura.readLine();
 		}
 		
-		for (Cliente c: clienteService.obterLista()) {
-			System.out.println("Cliente cadastrado com sucesso: " + c);	
-		}
+//		for (Cliente c: clienteService.obterLista()) {
+//			System.out.println("Cliente cadastrado com sucesso: " + c);	
+//		}
 
 		leitura.close();		
 	}

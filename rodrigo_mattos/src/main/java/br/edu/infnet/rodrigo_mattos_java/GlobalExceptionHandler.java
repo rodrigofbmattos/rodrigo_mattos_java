@@ -10,6 +10,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import br.edu.infnet.rodrigo_mattos_java.exceptions.ClienteNaoEncontradoException;
+import br.edu.infnet.rodrigo_mattos_java.exceptions.PedidoNaoEncontradoException;
 import br.edu.infnet.rodrigo_mattos_java.exceptions.VeiculoNaoEncontradoException;
 
 @ControllerAdvice
@@ -25,6 +27,16 @@ public class GlobalExceptionHandler {
 
 	@ExceptionHandler(VeiculoNaoEncontradoException.class)
 	public ResponseEntity<Object> handleValidationExceptions(VeiculoNaoEncontradoException ex) {
+		return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(ClienteNaoEncontradoException.class)
+	public ResponseEntity<Object> handleValidationExceptions(ClienteNaoEncontradoException ex) {
+		return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(PedidoNaoEncontradoException.class)
+	public ResponseEntity<Object> handleValidationExceptions(PedidoNaoEncontradoException ex) {
 		return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
 	}
 }

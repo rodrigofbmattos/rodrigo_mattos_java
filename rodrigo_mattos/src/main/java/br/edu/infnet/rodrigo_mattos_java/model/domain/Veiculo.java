@@ -11,8 +11,9 @@ import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.DecimalMax;
-import jakarta.validation.constraints.DecimalMin;
+//import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table(name = "veiculo")
@@ -22,9 +23,13 @@ public class Veiculo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@NotNull(message = "A Quantidade de Passageiros do Veículo é obrigatória.")
+	@Positive(message = "A Quantidade de Passageiros do Veículo deve ser maior do que zero.")
 	private Integer quantidadePassageiros;
 	
-	@DecimalMin(value = "0.1", message = "O Preço da Diária deve ser maior que zero.")
+	@NotNull(message = "O Preço da Diária do Veículo é obrigatório.")
+	//@DecimalMin(value = "0.1", message = "O Preço da Diária do Veículo deve ser maior que zero.")
+	@Positive(message = "O Preço da Diária do Veículo deve ser maior do que zero.")
 	private Float precoDiaria;
 	
 	@ManyToOne
@@ -34,7 +39,6 @@ public class Veiculo {
 
 	@Override
 	public String toString() {
-
 		return String.format("%d - %d - R$ %.2f",
 				id,
 				quantidadePassageiros,

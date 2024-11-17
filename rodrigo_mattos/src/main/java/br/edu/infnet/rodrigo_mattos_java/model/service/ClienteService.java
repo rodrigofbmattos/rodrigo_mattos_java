@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import br.edu.infnet.rodrigo_mattos_java.Constantes;
+import br.edu.infnet.rodrigo_mattos_java.exceptions.ClienteNaoEncontradoException;
 import br.edu.infnet.rodrigo_mattos_java.model.domain.Cliente;
 import br.edu.infnet.rodrigo_mattos_java.model.domain.Endereco;
 import br.edu.infnet.rodrigo_mattos_java.model.repository.ClienteRepository;
@@ -32,6 +34,14 @@ public class ClienteService {
 		clienteRepository.deleteById(id);
 		
 		return true;
+	}
+	
+	public Cliente alterar(Cliente cliente) {
+		if (!clienteRepository.existsById(cliente.getId())) {
+			throw new ClienteNaoEncontradoException(Constantes.MENSAGEM_CLIENTE_NAO_ENCONTRADO);
+		}
+		
+		return clienteRepository.save(cliente);
 	}
 	
 	public Collection<Cliente> obterLista() {

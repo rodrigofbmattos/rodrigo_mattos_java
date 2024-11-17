@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.edu.infnet.rodrigo_mattos_java.Constantes;
@@ -28,7 +29,7 @@ public class VeiculoService {
 	
 	public Veiculo alterar(Veiculo veiculo) {
 		if (!veiculoRepository.existsById(veiculo.getId())) {
-			throw new VeiculoNaoEncontradoException(Constantes.MENSAGEM_CLIENTE_NAO_ENCONTRADO);
+			throw new VeiculoNaoEncontradoException(Constantes.MENSAGEM_VEICULO_NAO_ENCONTRADO);
 		}
 		
 		return veiculoRepository.save(veiculo);
@@ -44,6 +45,10 @@ public class VeiculoService {
 	
 	public Collection<Veiculo> obterLista() {
 		return (Collection<Veiculo>) veiculoRepository.findAll();
+	}
+	
+	public Collection<Veiculo> obterListaOrdenadaPorPrecoDiaria() {
+		return (Collection<Veiculo>) veiculoRepository.findAll(Sort.by(Sort.Order.asc("precoDiaria")));
 	}
 	
 	public List<Veiculo> buscarPorPrecoDiariaEntre(float precoDiariaMinimo, float precoDiariaMaximo){

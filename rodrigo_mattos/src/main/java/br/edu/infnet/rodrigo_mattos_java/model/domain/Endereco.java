@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "endereco")
@@ -13,7 +15,10 @@ public class Endereco {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@NotBlank(message = "O CEP do Cliente é obrigatório.")
+	@Size(min = 8, max = 9, message = "O CEP do Cliente deve ter 8 caracteres. 9 caracteres se houver traço.")
 	private String cep;
+	
 	private String logradouro;
 	private String complemento;
 	private String bairro;
@@ -21,16 +26,9 @@ public class Endereco {
 	private String uf;
 	
 	public Endereco() {
+		
 	}
 	
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	public Endereco(String cep) {
 		this();
 		this.setCep(cep);
@@ -38,15 +36,21 @@ public class Endereco {
 	
 	@Override
 	public String toString() {
-		return String.format("[%s]: Logradouro: %s; Complemento: $s; Bairro: %s; Localidade: %s; UF: %s",
+		return String.format("CEP: %s - Logradouro: %s; Complemento: %s; Bairro: %s; Localidade: %s; UF: %s",
 				cep,
 				logradouro,
-				complemento,
+				(complemento == "" ? "N/A" : complemento),
 				bairro,
 				localidade,
 				uf);
 	}
 	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public String getCep() {
 		return cep;
 	}

@@ -41,6 +41,16 @@ public class VeiculoController {
 		return ResponseEntity.ok(veiculoService.obterLista());
 	}
 	
+	@Operation(summary = "Recupera todos os Veículos existentes ordenados por Preço da Diária.")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Sucesso"),
+			@ApiResponse(responseCode = "500", description = "Erro interno do sistema")
+		})
+	@GetMapping(value = "/lista/ordenadaPorPrecoDiaria")
+	public ResponseEntity<Collection<Veiculo>> obterListaOrdenadaPorPrecoDiaria() {
+		return ResponseEntity.ok(veiculoService.obterListaOrdenadaPorPrecoDiaria());
+	}
+	
 	@Operation(summary = "Inclui um novo Veículo.")
 	@PostMapping(value = "/incluir")
 	public ResponseEntity<String> incluir(@Valid @RequestBody Veiculo veiculo) {

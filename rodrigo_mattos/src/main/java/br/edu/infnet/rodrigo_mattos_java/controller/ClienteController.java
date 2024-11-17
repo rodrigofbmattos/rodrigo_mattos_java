@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,7 +44,7 @@ public class ClienteController {
 			@ApiResponse(responseCode = "200", description = "Sucesso"),
 			@ApiResponse(responseCode = "500", description = "Erro interno do sistema")
 		})
-	@GetMapping(value = "/lista/OrdenadoPorNome")
+	@GetMapping(value = "/lista/ordenadaPorNome")
 	public ResponseEntity<Collection<Cliente>> obterListaOrdenadaPorNome() {
 		return ResponseEntity.ok(clienteService.obterListaOrdenadaPorNome());
 	}
@@ -64,6 +65,14 @@ public class ClienteController {
 		}
 		
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Constantes.MENSAGEM_CLIENTE_NAO_ENCONTRADO);
+	}
+	
+	@Operation(summary = "Altera um Cliente existente.")
+	@PutMapping(value = "/alterar")
+	public ResponseEntity<Cliente> alterar(@Valid @RequestBody Cliente cliente) {
+		Cliente clienteAtualizado = clienteService.alterar(cliente);
+		
+		return ResponseEntity.ok(clienteAtualizado);
 	}
 	
 	@Operation(summary = "Busca um Cliente através do Nome.")

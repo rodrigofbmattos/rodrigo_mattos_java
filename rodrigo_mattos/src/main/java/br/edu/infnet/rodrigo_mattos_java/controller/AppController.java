@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import br.edu.infnet.rodrigo_mattos_java.model.service.CaminhaoService;
+import br.edu.infnet.rodrigo_mattos_java.model.service.CarroService;
 import br.edu.infnet.rodrigo_mattos_java.model.service.ClienteService;
 import br.edu.infnet.rodrigo_mattos_java.model.service.PedidoService;
 import br.edu.infnet.rodrigo_mattos_java.model.service.VeiculoService;
@@ -16,9 +18,9 @@ public class AppController {
 	@Autowired
 	private VeiculoService veiculoService;
 	@Autowired
-	private ClienteService carroService;
+	private CarroService carroService;
 	@Autowired
-	private ClienteService caminhaoService;
+	private CaminhaoService caminhaoService;
 	@Autowired
 	private PedidoService pedidoService;
 	
